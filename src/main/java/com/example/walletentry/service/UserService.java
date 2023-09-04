@@ -29,8 +29,8 @@ public class UserService {
             throw new IllegalStateException("format incorrect");
         User user = userRepository.findByPhoneNumber(phoneNumber);
         if (user == null) {
-            User user1 = new User();
-            user1.setPhoneNumber(phoneNumber);
+            user = new User();
+            user.setPhoneNumber(phoneNumber);
         }
         String newVerificationCode = verificationCode.generateVerificationCode();
         user.setVerificationCode(newVerificationCode);

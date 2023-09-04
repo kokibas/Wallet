@@ -1,0 +1,44 @@
+version: '3'
+networks:
+  network:
+    driver: bridge
+
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    networks:
+      - network
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+    ports:
+      - "5432:5432"
+
+  wallet:
+    image: front
+    container_name: wallet
+    networks:
+      - network
+    ports:
+      - "8081:8081"
+
+  WalletEntry:
+    image: wallet_img
+    container_name: WalletEntry
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    networks:
+      - network
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=123
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
