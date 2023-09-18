@@ -18,12 +18,12 @@ services:
       - "5432:5432"
 
   wallet:
-    image: front
+    image: frontvue
     container_name: wallet
     networks:
       - network
     ports:
-      - "8081:8081"
+      - "8083:8083"
 
   WalletEntry:
     image: wallet_img

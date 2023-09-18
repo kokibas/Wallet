@@ -18,10 +18,10 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/register")
-    public UserRegistrationResponse registerUser(@RequestBody UserRegistrationRequest request){
-            User user = userService.registerUser(request.getPhoneNumber());
+    public UserRegistrationResponse registerUser(@RequestBody UserRegistrationRequest request) {
+        User user = userService.registerUser(request.getPhoneNumber());
 
-            return new UserRegistrationResponse(true);
+        return new UserRegistrationResponse(true);
 
     }
 }
