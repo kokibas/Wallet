@@ -29,7 +29,7 @@ public class JwtConf  {
 
     @PostConstruct
     public void setUp() {
-        this.key = Keys.hmacShaKeyFor(secret.getBytes());
+        this.key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
     }
 
     public String generateToken(User user) {
